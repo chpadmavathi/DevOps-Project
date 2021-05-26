@@ -2,19 +2,11 @@
   become: true
   become_user: root
   tasks:
-  - name: install Git
-    yum: name=git state=present
   - name: install Docker
     yum: name=docker state=present
   - name: start docker
     service: name=docker state=started
-  - name: clone a repo
-    git: repo=https://github.com/chpadmavathi/DevOps-Project.git dest=/tmp/gitrepo
-  - name: login docker
-    command: docker login --username padma04 --password Bhargav@20
-  - name: tag the image
-    command: docker tag devopsedu/webapp padma04/devopsedu/webapp
-  - name: push
-    command: docker push padma04/devopsedu/webapp1
+  - name: pull the docker image
+    command: docker pull devopsedu/webapp
   - name: create container
-    command: docker run -itd -P devopsedu/webapp1
+    command: docker run -itd -P devopsedu/webapp
