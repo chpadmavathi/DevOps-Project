@@ -1,13 +1,11 @@
----
 - hosts: webservers
   become: true
   become_user: root
- tasks:
-  - name: install git & docker
-    yum: name={{item}} state=present
-    loop:
-    - git
-    - docker
+  tasks:
+  - name: install Git
+    yum: name=git state=present
+  - name: install Docker
+    yum: name=docker state=present
   - name: start docker
     service: name=docker state=started
   - name: clone a repo
